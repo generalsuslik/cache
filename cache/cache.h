@@ -34,9 +34,9 @@ namespace imc {
         }
 
         std::optional<V> Get(const K& key) {
-            auto hash = hash_(key);
-
             std::shared_lock lock(mutex_);
+
+            auto hash = hash_(key);
             return shards_[hash % num_shards_].Get(key);
         }
 
